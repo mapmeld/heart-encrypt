@@ -28,7 +28,7 @@ function encrypt(message, callback, options) {
     }
     while (placeVal > 0) {
       var index = Math.floor(code);
-      output += bytePieces[index];
+      output += options.characters[index];
       code = (code - index) * options.characters.length;
       placeVal--;
     }
@@ -48,7 +48,7 @@ function decrypt(message, callback, options) {
     var code = 0;
     for (var c2 = 0; c2 < message[c].length; c2+=2) {
       code *= 10;
-      code += bytePieces.indexOf(message[c][c2] + message[c][c2+1]);
+      code += options.characters.indexOf(message[c][c2] + message[c][c2+1]);
     }
     var code = parseInt(code, options.characters.length);
     output += String.fromCharCode(code);
