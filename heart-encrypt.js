@@ -1,4 +1,12 @@
-const bytePieces = ['A','B','C','D','E','F','G','H'];
+const bytePieces = [
+'❤️',
+'💛 ',
+'💙 ',
+'💜 ',
+'💖 ',
+'💘 ',
+'💝',
+'💟'];
 
 function encrypt(message, callback, options) {
   if (!options || !options.characters) {
@@ -38,9 +46,9 @@ function decrypt(message, callback, options) {
   var message = message.split(/\s+/);
   for (var c = 0; c < message.length; c++) {
     var code = 0;
-    for (var c2 = 0; c2 < message[c].length; c2++) {
+    for (var c2 = 0; c2 < message[c].length; c2+=2) {
       code *= 10;
-      code += bytePieces.indexOf(message[c][c2]);
+      code += bytePieces.indexOf(message[c][c2] + message[c][c2+1]);
     }
     var code = parseInt(code, options.characters.length);
     output += String.fromCharCode(code);
