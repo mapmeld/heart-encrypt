@@ -1,6 +1,6 @@
 # heart-encrypt
 
-Encode ASCII messages with Emoji hearts
+Encode ASCII messages with Emoji hearts or other characters
 
 ## Usage
 
@@ -24,10 +24,10 @@ decrypt('💛💝💟 💛💘💟 💛💝💙 💛💘💖 💛💖💖 ', fun
 
 ### Custom
 
-You can use a custom set of 2-10 Emojis by adding an options parameter to both
+You can use a custom set of 2-10 different chatacters by adding an options parameter to both
 functions.
 
-Do not use non-Emoji characters in this release.
+In this release, the characters should be simple characters or emojis and not combined emojis (for example, national flags)
 
 ```javascript
 encrypt('less cool', function (err, message) {

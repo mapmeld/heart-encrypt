@@ -41,7 +41,7 @@ function encrypt(message, callback, options) {
     }
     output += ' ';
   }
-  callback(null, output);
+  callback(null, output.trim());
 }
 
 function decrypt(message, callback, options) {
