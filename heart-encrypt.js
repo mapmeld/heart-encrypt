@@ -8,10 +8,17 @@ const bytePieces = [
 '💝',
 '💟'];
 
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
+
 function encrypt(message, callback, options) {
   if (!options || !options.characters) {
     options = { characters: bytePieces };
   }
+  message = message.trim();
 
   var output = '';
   for (var c = 0; c < message.length; c++) {
@@ -43,12 +50,27 @@ function decrypt(message, callback, options) {
   }
 
   var output = '';
-  var message = message.split(/\s+/);
+  var message = message.trim().split(/\s+/);
   for (var c = 0; c < message.length; c++) {
     var code = 0;
-    for (var c2 = 0; c2 < message[c].length; c2+=2) {
+    var c2 = 0;
+    while (c2 < message[c].length) {
       code *= 10;
-      code += options.characters.indexOf(message[c][c2] + message[c][c2+1]);
+      var singleChar = message[c][c2];
+      if (options.characters.indexOf(singleChar) > -1) {
+        code += options.characters.indexOf(singleChar);
+        c2++;
+      } else if (c2 + 1 < message[c].length) {
+        var doubleChar = singleChar + message[c][c2+1];
+        if (options.characters.indexOf(doubleChar) > -1) {
+          code += options.characters.indexOf(doubleChar);
+          c2 += 2;
+        } else {
+          c2++;
+        }
+      } else {
+        c2++;
+      }
     }
     var code = parseInt(code, options.characters.length);
     output += String.fromCharCode(code);
