@@ -1,5 +1,7 @@
 # heart-encrypt
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mapmeld/heart-encrypt.svg)](https://greenkeeper.io/)
+
 Encode ASCII messages with Emoji hearts or other characters
 
 ## Usage
